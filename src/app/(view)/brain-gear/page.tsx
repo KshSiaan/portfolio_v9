@@ -301,7 +301,7 @@ export default function BrainGearPage() {
               <p className="font-bold uppercase tracking-widest text-red-500">
                 RAVEN_OS
               </p>
-              <p className="text-[10px] text-white/40">v4.0.2-stable</p>
+              <p className="text-[10px] text-white/40">v9.0.2-stable</p>
             </div>
           </div>
 
