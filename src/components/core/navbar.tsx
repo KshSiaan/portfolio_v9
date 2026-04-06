@@ -64,6 +64,7 @@ const loadSoundCloudApi = async (): Promise<void> => {
 export default function Navbar() {
   const [play] = useSound("audio/click.mp3", { volume: 0.5 });
   const [embedSrc, setEmbedSrc] = useState<string>("");
+  const [trackTitle, setTrackTitle] = useState("SoundCloud Track");
   const [isPlaying, setIsPlaying] = useState(false);
   const [isPlayerReady, setIsPlayerReady] = useState(false);
   const [wantsPlayAfterInit, setWantsPlayAfterInit] = useState(false);
@@ -137,6 +138,7 @@ export default function Navbar() {
           throw new Error("Invalid player response");
         }
 
+        setTrackTitle((data as { title?: string }).title ?? "SoundCloud Track");
         setWantsPlayAfterInit(true);
         setEmbedSrc(src);
       } catch {
@@ -161,18 +163,18 @@ export default function Navbar() {
 
   return (
     <nav
-      className="flex justify-between items-center gap-6"
+      className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between md:gap-6"
       style={{ viewTransitionName: "site-header" }}
     >
-      <div className="text-base font-bold text-red-500 drop-shadow-[0_0_3px_rgba(255,110,110,0.95)] filter-[drop-shadow(0_0_8px_rgba(239,68,68,0.7))_drop-shadow(0_0_14px_rgba(220,38,38,0.45))]">
+      <div className="text-sm font-bold text-red-500 drop-shadow-[0_0_3px_rgba(255,110,110,0.95)] filter-[drop-shadow(0_0_8px_rgba(239,68,68,0.7))_drop-shadow(0_0_14px_rgba(220,38,38,0.45))] sm:text-base md:text-lg">
         RAVEN
       </div>
-      <div className="space-x-4">
+      <div className="flex w-full items-center justify-center gap-2 overflow-x-auto pb-1 md:w-auto md:flex-wrap md:justify-start md:pb-0">
         {navs.map((nav) => (
           <Button
             key={nav.name}
             className={cn(
-              `border-0`,
+              "border-0 px-2 py-1 text-[11px] sm:px-3 sm:py-2 md:px-4",
               path === nav.href && "border-b-3! border-red-600 text-red-600",
             )}
             variant="ghost"
@@ -186,8 +188,34 @@ export default function Navbar() {
           </Button>
         ))}
       </div>
-      <div className="flex items-center gap-2">
-        <Button size={"icon-lg"} variant={"ghost"} onClick={() => play()}>
+      <div className="flex w-full items-center justify-between gap-2 md:w-auto md:justify-end">
+        <div className="min-w-0 flex-1 overflow-hidden text-[10px] uppercase tracking-widest text-[#ffb4a8] md:min-w-28 md:max-w-44 md:flex-none">
+          {isTrackLoading ? (
+            <span className="inline-flex items-center gap-2 text-[#d7ffc5]">
+              <span className="size-2 animate-pulse rounded-full bg-[#d7ffc5]" />
+              Loading track...
+            </span>
+          ) : trackError ? (
+            <span className="text-[#ff9a9a]">{trackError}</span>
+          ) : isPlaying ? (
+            <div className="overflow-hidden whitespace-nowrap text-[#d7ffc5]">
+              <div className="inline-flex min-w-full gap-8 pr-8 animate-[track-marquee_12s_linear_infinite]">
+                <span>Playing:</span>
+                <span>{trackTitle}</span>
+                <span>Playing:</span>
+                <span>{trackTitle}</span>
+              </div>
+            </div>
+          ) : (
+            <span className="text-[#ffb4a8b3]">Ready</span>
+          )}
+        </div>
+        <Button
+          size={"icon-lg"}
+          variant={"ghost"}
+          onClick={() => play()}
+          className="shrink-0"
+        >
           <FaGithub />
         </Button>
         <Button
@@ -195,6 +223,7 @@ export default function Navbar() {
           variant={"ghost"}
           onClick={toggleSoundCloud}
           disabled={isTrackLoading}
+          className="shrink-0"
           aria-label={
             isTrackLoading
               ? "Loading track"
@@ -205,21 +234,6 @@ export default function Navbar() {
         >
           {isPlaying ? <PauseIcon /> : <PlayIcon />}
         </Button>
-
-        <div className="min-w-28 text-[10px] uppercase tracking-widest text-[#ffb4a8]">
-          {isTrackLoading ? (
-            <span className="inline-flex items-center gap-2 text-[#d7ffc5]">
-              <span className="size-2 animate-pulse rounded-full bg-[#d7ffc5]" />
-              Loading track...
-            </span>
-          ) : trackError ? (
-            <span className="text-[#ff9a9a]">{trackError}</span>
-          ) : isPlaying ? (
-            <span className="text-[#d7ffc5]">Now playing</span>
-          ) : (
-            <span className="text-[#ffb4a8b3]">Ready</span>
-          )}
-        </div>
       </div>
 
       {embedSrc ? (
@@ -231,6 +245,17 @@ export default function Navbar() {
           allow="autoplay"
         />
       ) : null}
+
+      <style jsx>{`
+        @keyframes track-marquee {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+      `}</style>
     </nav>
   );
 }

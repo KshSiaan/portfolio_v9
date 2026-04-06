@@ -43,7 +43,7 @@ export const ravenVariants = [
   {
     name: "portfolio",
     route: "/portfolio",
-    position: [-0.2, -0.02, 2.3],
+    position: [-0.2, -0.01, 2.3],
     rotation: [0.2, Math.PI * 0.3, 0.08],
     pageMotion: {
       initial: { opacity: 0, x: 24, scale: 0.985, filter: "blur(10px)" },
@@ -66,7 +66,7 @@ export const ravenVariants = [
   {
     name: "scan",
     route: "/scan",
-    position: [-0.3, -0.4, 2.35],
+    position: [-0.3, -0.5, 2.35],
     rotation: [0.3, Math.PI * -0.5, 0],
     pageMotion: {
       initial: { opacity: 0, x: -20, scale: 0.985, filter: "blur(10px)" },
