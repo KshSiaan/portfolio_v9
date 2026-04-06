@@ -233,9 +233,9 @@ const sectionData: Record<SectionKey, SectionData> = {
       {
         period: "PERSONAL",
         id: "0XSTAT3",
-        title: "HOBBIES",
+        title: "WRITING",
         description:
-          "Design exploration, side projects, music, and learning new systems.",
+          "I enjoy writing as a way to clarify my thoughts and share ideas, whether it's technical blogging or personal journaling.",
       },
     ],
     channels: [
