@@ -67,31 +67,31 @@ const sectionData: Record<SectionKey, SectionData> = {
     rightSubtitle: "CAREER_HISTORY",
     rightTitle: "WORK_RECORD",
     skills: [
-      { label: "Years Active", value: 92 },
-      { label: "Systems Shipped", value: 88 },
-      { label: "Team Impact", value: 95 },
-      { label: "Problem Solving", value: 90 },
+      { label: "Years Active", value: 6 },
+      { label: "Systems Shipped", value: 24 },
+      { label: "Team Impact", value: 75 },
+      { label: "Problem Solving", value: 84 },
     ],
     infoLines: [
-      "[INFO] PLAYER_LEVEL: SENIOR",
+      "[INFO] PLAYER_LEVEL: INTERMEDIATE",
       "[INFO] PROFESSIONAL_EXPERIENCE: MULTI_DOMAIN",
       "[INFO] DELIVERY_MODE: CONSISTENT",
     ],
     deployments: [
       {
         period: "CURRENT",
-        id: "0X4492",
-        title: "LEAD ENGINEER",
+        id: "Sparktech Agency",
+        title: "FRONT END ENGINEER",
         description:
           "Building reliable product systems, aligning engineering decisions with business goals.",
         active: true,
       },
       {
         period: "PREVIOUS",
-        id: "0X8123",
-        title: "FULL-STACK SPECIALIST",
+        id: "Business automation Ltd.",
+        title: "SOFTWARE ENGINEERING INTERN",
         description:
-          "Shipped user-facing tools and backend flows with emphasis on performance and clarity.",
+          "Contributed to internal tools, improving data workflows and operational efficiency.",
       },
       {
         period: "EARLY",
@@ -110,13 +110,13 @@ const sectionData: Record<SectionKey, SectionData> = {
   tech_stack: {
     subtitle: "FAVORITE_LANGUAGES",
     title: "LANGUAGE_PROFILE",
-    rightSubtitle: "STACK_PREFERENCE",
-    rightTitle: "TOP_LANGUAGES",
+    rightSubtitle: "TECH PREFERENCES",
+    rightTitle: "SKILL MATRIX",
     skills: [
-      { label: "TypeScript", value: 98 },
-      { label: "JavaScript", value: 91 },
-      { label: "Python", value: 84 },
-      { label: "CSS / HTML", value: 90 },
+      { label: "TypeScript", value: 78 },
+      { label: "React", value: 91 },
+      { label: "CSS / HTML", value: 97 },
+      { label: "SQL", value: 64 },
     ],
     infoLines: [
       "[INFO] FAVORITE_LANGUAGE: TYPESCRIPT",
@@ -127,30 +127,30 @@ const sectionData: Record<SectionKey, SectionData> = {
       {
         period: "PRIMARY",
         id: "0X7701",
-        title: "TYPE-SAFE UI WORK",
+        title: "NEXT JS",
         description:
-          "Preferred for product surfaces, component systems, and app architecture.",
+          "The main framework I use for building projects, with a focus on clean architecture and performance.",
         active: true,
       },
       {
         period: "SECONDARY",
         id: "0X7702",
-        title: "SCRIPTS + AUTOMATION",
+        title: "FIGMA",
         description:
-          "Used for fast iteration, data shaping, and small utility workflows.",
+          "My go-to design tool for prototyping and UI exploration, helping to bridge the gap between design and development.",
       },
       {
         period: "SUPPORT",
         id: "0X7703",
-        title: "DESIGN-LEAN CODE",
+        title: "MIRO + NOTION",
         description:
-          "Useful when building interfaces that need motion, polish, and structure.",
+          "Essential for planning, documentation, and collaboration, keeping projects organized and on track.",
       },
     ],
     channels: [
-      { label: "TYPESCRIPT", icon: SparkleIcon },
-      { label: "JAVASCRIPT", icon: HardDrivesIcon },
-      { label: "PYTHON", icon: ActivityIcon },
+      { label: "ELYSIA JS", icon: SparkleIcon },
+      { label: "DRIZZLE", icon: HardDrivesIcon },
+      { label: "NEON DB", icon: ActivityIcon },
     ],
   },
   deployments: {
@@ -173,24 +173,23 @@ const sectionData: Record<SectionKey, SectionData> = {
       {
         period: "FEATURED",
         id: "0XA913",
-        title: "HUD / PORTFOLIO EXPERIENCE",
-        description:
-          "A favorite because it blends motion, state, and presentation into one surface.",
+        title: "AETHER",
+        description: "Code block management and collaboration platform",
         active: true,
       },
       {
-        period: "FEATURED",
+        period: "SUCCESS",
         id: "0XA552",
-        title: "BRANDED LANDING PAGES",
+        title: "VAPE SHOP MAPS",
         description:
-          "Strong visual work that keeps the interface memorable without losing clarity.",
+          "A B2B B2C Business platform for vape shops across the US, built with Next.js and Laravel.",
       },
       {
-        period: "FEATURED",
+        period: "UNDER DEVELOPMENT",
         id: "0XA201",
-        title: "UTILITY / TOOLING PROJECTS",
+        title: "POVII",
         description:
-          "Small but useful builds that solve a concrete problem and sharpen the stack.",
+          "AI Powered learning companion focused on personalized education and skill development with a easy to navigate kids friendly interface.",
       },
     ],
     channels: [
@@ -205,10 +204,10 @@ const sectionData: Record<SectionKey, SectionData> = {
     rightSubtitle: "PERSONAL_SIGNAL",
     rightTitle: "DAILY_DRIVE",
     skills: [
-      { label: "Communication", value: 95 },
-      { label: "Ownership", value: 94 },
-      { label: "Adaptability", value: 92 },
-      { label: "Curiosity", value: 97 },
+      { label: "Music Production", value: 95 },
+      { label: "Sketching", value: 94 },
+      { label: "Philosophy", value: 72 },
+      { label: "Gaming", value: 87 },
     ],
     infoLines: [
       "[INFO] SOFT_SKILLS: STRONG COLLABORATION",
@@ -219,9 +218,9 @@ const sectionData: Record<SectionKey, SectionData> = {
       {
         period: "PERSONAL",
         id: "0XSTAT1",
-        title: "COMMUNICATION",
+        title: "MUSIC",
         description:
-          "I like keeping updates short, direct, and useful for the team.",
+          "Theres no such thing as emotional dependency when there is music to keep you move on",
         active: true,
       },
       {
@@ -329,12 +328,12 @@ export default function BrainGearPage() {
           </div>
 
           <div className="mt-auto px-6">
-            <button
+            {/* <button
               type="button"
               className="w-full bg-linear-to-br from-[#ffb4a8] to-[#ff5540] py-4 font-bold uppercase tracking-widest text-[#410000] transition-all hover:shadow-[0_0_20px_rgba(255,85,64,0.4)] active:scale-95"
             >
               INIT_CONTACT
-            </button>
+            </button> */}
           </div>
         </aside>
 
