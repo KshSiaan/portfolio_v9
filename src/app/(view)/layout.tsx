@@ -7,9 +7,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <main className="relative min-h-dvh w-dvw bg-background">
+    <main className="relative h-dvh w-dvw bg-background flex flex-col">
       <BG />
-      <section className="relative z-10 h-dvh w-dvw p-6 flex flex-col">
+      <section className="relative z-10 flex-1 w-dvw overflow-y-auto flex flex-col p-4 sm:p-6 lg:h-dvh lg:overflow-y-hidden">
         <Navbar />
 
         {children}

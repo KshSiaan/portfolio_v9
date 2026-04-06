@@ -179,6 +179,17 @@ export default function PortfolioPage() {
     });
   }, []);
 
+  useEffect(() => {
+    const scrollableParent = document.querySelector(
+      'section[class*="overflow-y-auto"]',
+    ) as HTMLElement;
+    if (scrollableParent) {
+      scrollableParent.scrollTo({ top: 0, behavior: "instant" });
+    } else {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
+  }, []);
+
   const handleNext = () => {
     playClick();
     const repoCount = sortedRepos.length || 1;

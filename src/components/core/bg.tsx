@@ -1,10 +1,39 @@
 "use client";
-import { Canvas } from "@react-three/fiber";
+import { Canvas, useThree } from "@react-three/fiber";
 import { Environment } from "@react-three/drei";
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
 import Raven from "./raven";
 import { useRavenVariantStore } from "@/stores/raven-variant-store";
+
+function ResponsiveCamera() {
+  const { camera } = useThree();
+
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth;
+      const perspCamera = camera as any;
+
+      if (width < 768) {
+        perspCamera.position.set(0, 0.5, 6.5);
+        perspCamera.fov = 55;
+      } else if (width < 1024) {
+        perspCamera.position.set(0, 0, 5.5);
+        perspCamera.fov = 48;
+      } else {
+        perspCamera.position.set(0, 0, 5);
+        perspCamera.fov = 45;
+      }
+      perspCamera.updateProjectionMatrix();
+    };
+
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, [camera]);
+
+  return null;
+}
 
 export default function BG() {
   const pathname = usePathname();
@@ -40,6 +69,7 @@ export default function BG() {
           position={[-4, 1.5, 3]}
         />
         <Environment preset="forest" />
+        <ResponsiveCamera />
         <Raven
           position={activeScene.position}
           rotation={activeScene.rotation}

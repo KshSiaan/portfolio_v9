@@ -200,6 +200,17 @@ export default function Home() {
     };
   }, [showContactMenu]);
 
+  useEffect(() => {
+    const scrollableParent = document.querySelector(
+      'section[class*="overflow-y-auto"]',
+    ) as HTMLElement;
+    if (scrollableParent) {
+      scrollableParent.scrollTo({ top: 0, behavior: "instant" });
+    } else {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
+  }, []);
+
   const {
     data: reposData,
     error: reposError,
@@ -556,7 +567,7 @@ export default function Home() {
                 <div className="grid grid-cols-2 gap-2">
                   <a
                     role="menuitem"
-                    href="https://www.linkedin.com"
+                    href="https://www.linkedin.com/in/shahibul-hasan-777395302"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 border border-red-400/30 bg-red-500/10 px-3 py-2 text-[11px] tracking-wide text-red-100 transition-colors hover:bg-red-500/20"
@@ -570,7 +581,7 @@ export default function Home() {
                   </a>
                   <a
                     role="menuitem"
-                    href="https://www.behance.net"
+                    href="https://www.behance.net/kshsiaan"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 border border-red-400/30 bg-red-500/10 px-3 py-2 text-[11px] tracking-wide text-red-100 transition-colors hover:bg-red-500/20"
@@ -584,7 +595,7 @@ export default function Home() {
                   </a>
                   <a
                     role="menuitem"
-                    href="mailto:hello@example.com"
+                    href="mailto:kshsiaan@gmail.com"
                     className="flex items-center gap-2 border border-red-400/30 bg-red-500/10 px-3 py-2 text-[11px] tracking-wide text-red-100 transition-colors hover:bg-red-500/20"
                   >
                     <EnvelopeSimpleIcon
@@ -596,7 +607,7 @@ export default function Home() {
                   </a>
                   <a
                     role="menuitem"
-                    href="https://wa.me/1234567890"
+                    href="https://wa.me/01904387966"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center gap-2 border border-red-400/30 bg-red-500/10 px-3 py-2 text-[11px] tracking-wide text-red-100 transition-colors hover:bg-red-500/20"
