@@ -169,7 +169,7 @@ export default function Navbar() {
       <div className="text-sm font-bold text-red-500 drop-shadow-[0_0_3px_rgba(255,110,110,0.95)] filter-[drop-shadow(0_0_8px_rgba(239,68,68,0.7))_drop-shadow(0_0_14px_rgba(220,38,38,0.45))] sm:text-base md:text-lg">
         RAVEN
       </div>
-      <div className="flex w-full items-center justify-center gap-2 overflow-x-auto pb-1 md:w-auto md:flex-wrap md:justify-start md:pb-0">
+      <div className="flex w-full items-center overflow-hidden justify-center gap-2 overflow-x-auto pb-1 md:w-auto md:flex-wrap md:justify-start md:pb-0">
         {navs.map((nav) => (
           <Button
             key={nav.name}

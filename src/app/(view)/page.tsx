@@ -136,7 +136,7 @@ const fetcher = async <T,>(url: string): Promise<T> => {
 function MetricCard({ icon: Icon, title, value }: MetricCardItem) {
   return (
     <motion.div
-      className="relative flex w-fit items-stretch gap-4 overflow-hidden border border-yellow-400 p-4 shadow-lg shadow-[#CBFFB6]/10 bg-linear-to-br from-background to-zinc-900/80"
+      className="relative flex lg:w-fit items-stretch gap-4 overflow-hidden border w-full border-yellow-400 p-4 shadow-lg shadow-[#CBFFB6]/10 bg-linear-to-br from-background to-zinc-900/80"
       variants={metricCardVariants}
       whileHover={{
         y: -4,
@@ -343,7 +343,7 @@ export default function Home() {
       </motion.div>
       <motion.div className="flex-1 h-full" variants={sectionVariants}>
         <motion.div
-          className="fixed top-[20%] left-[20%] z-10 w-fit overflow-hidden border border-l-6 border-red-500 p-6 shadow-lg shadow-red-500/40 bg-linear-to-br from-background to-zinc-900/80"
+          className="hidden lg:block fixed overflow-visible top-[20%] left-[12%] z-10 w-fit  border border-l-6 border-red-500 p-6 shadow-lg shadow-red-500/40 bg-linear-to-br from-background to-zinc-900/80"
           variants={panelVariants}
           whileHover={{
             scale: 1.01,
@@ -376,7 +376,7 @@ export default function Home() {
             {/** biome-ignore lint/suspicious/noCommentText: <explanation> */}
             OPERATOR // STATUS: ACTIVE
           </motion.h4>
-          <p className="text-6xl mt-6 font-medium">V_RAVEN_09</p>
+          <p className="text-xl lg:text-6xl mt-6 font-medium">V_RAVEN_09</p>
           <div className="mt-6 flex gap-3">
             <motion.div
               className="h-2 w-18 bg-red-300"
@@ -409,9 +409,9 @@ export default function Home() {
             ></motion.div>
           </div>
         </motion.div>
-        <div className="relative h-full w-full">
+        <div className="relative h-full w-1/2 lg:w-full ">
           <motion.div
-            className="absolute bottom-6 left-6 z-20 flex items-center justify-start gap-4"
+            className="absolute bottom-6 hidden left-6 z-20! sm:grid grid-cols-1 lg:flex items-center justify-start gap-4"
             variants={rowVariants}
             initial="hidden"
             animate="show"
@@ -427,7 +427,7 @@ export default function Home() {
         className="h-full flex flex-col justify-end items-end"
         variants={sectionVariants}
       >
-        <div className="h-[30%]">
+        <div className="h-[30%] col-span-2 hidden lg:block">
           <div className="border-r h-full border-red-600/40 flex flex-col items-end">
             {/* <div className="h-12 w-1 bg-red-600"></div> */}
             <div className="h-12 w-1 bg-red-600 mt-24"></div>
@@ -440,7 +440,7 @@ export default function Home() {
         </div>
         {reposLoading ? (
           <motion.div
-            className="border-[#CBFFB6]/30 shadow-lg mt-12 shadow-[#CBFFB6]/10 w-fit border-2 p-6 bg-linear-to-br from-background to-zinc-900/80"
+            className="hidden lg:block border-[#CBFFB6]/30 shadow-lg mt-12 shadow-[#CBFFB6]/10 w-fit border-2 p-6 bg-linear-to-br from-background to-zinc-900/80"
             variants={panelVariants}
           >
             <h4 className="text-xs font-mono! text-[#CBFFB6] tracking-[4px]">
@@ -456,7 +456,7 @@ export default function Home() {
           </motion.div>
         ) : reposError ? (
           <motion.div
-            className="border-red-500/40 shadow-lg mt-12 shadow-red-500/10 w-fit border-2 p-6 bg-linear-to-br from-background to-zinc-900/80"
+            className="hidden lg:block border-red-500/40 shadow-lg mt-12 shadow-red-500/10 w-fit border-2 p-6 bg-linear-to-br from-background to-zinc-900/80"
             variants={panelVariants}
           >
             <h4 className="text-xs font-mono! text-red-400 tracking-[4px]">
@@ -492,7 +492,7 @@ export default function Home() {
                 href={project.htmlUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`border-[#CBFFB6]/30 shadow-lg shadow-[#CBFFB6]/10 w-fit border-2 p-6 bg-linear-to-br from-background to-zinc-900/80 ${idx === 0 ? "mt-12" : "mt-6"}`}
+                className={`hidden lg:block border-[#CBFFB6]/30 shadow-lg shadow-[#CBFFB6]/10 w-fit border-2 p-6 bg-linear-to-br from-background to-zinc-900/80 ${idx === 0 ? "mt-12" : "mt-6"}`}
                 variants={panelVariants}
                 whileHover={{
                   x: -4,
@@ -548,7 +548,7 @@ export default function Home() {
                 animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
                 exit={{ opacity: 0, y: 8, scale: 0.98, filter: "blur(8px)" }}
                 transition={{ duration: 0.2, ease: "easeOut" }}
-                className="absolute bottom-22 right-0 z-50 w-72 border border-red-400/35 bg-zinc-950/90 p-3 shadow-2xl shadow-red-500/25 backdrop-blur-md"
+                className="absolute bottom-22 right-0 z-50! w-72 border border-red-400/35 bg-zinc-950/90 p-3 shadow-2xl shadow-red-500/25 backdrop-blur-md"
               >
                 <p className="mb-3 text-[10px] font-mono! tracking-[0.2em] text-[#CBFFB6]">
                   CONTACT GRID
