@@ -17,6 +17,12 @@ import {
   TerminalWindowIcon,
   WaveformIcon,
 } from "@phosphor-icons/react/dist/ssr";
+import {
+  BehanceLogoIcon,
+  EnvelopeSimpleIcon,
+  LinkedinLogoIcon,
+  WhatsappLogoIcon,
+} from "@phosphor-icons/react";
 
 type SectionKey = "core_bio" | "tech_stack" | "deployments" | "system_status";
 
@@ -327,13 +333,76 @@ export default function BrainGearPage() {
             })}
           </div>
 
-          <div className="mt-auto px-6">
-            {/* <button
-              type="button"
-              className="w-full bg-linear-to-br from-[#ffb4a8] to-[#ff5540] py-4 font-bold uppercase tracking-widest text-[#410000] transition-all hover:shadow-[0_0_20px_rgba(255,85,64,0.4)] active:scale-95"
+          <div className="mt-auto  pr-6">
+            <motion.div
+              key="contact-menu"
+              role="menu"
+              initial={{ opacity: 0, y: 8, scale: 0.98, filter: "blur(8px)" }}
+              animate={{ opacity: 1, y: 0, scale: 1, filter: "blur(0px)" }}
+              exit={{ opacity: 0, y: 8, scale: 0.98, filter: "blur(8px)" }}
+              transition={{ duration: 0.2, ease: "easeOut" }}
+              className="w-full border border-red-400/35 bg-zinc-950/90 p-3 backdrop-blur-md"
             >
-              INIT_CONTACT
-            </button> */}
+              <p className="mb-3 text-[10px] font-mono! tracking-[0.2em] text-[#CBFFB6]">
+                CONTACT GRID
+              </p>
+              <div className="grid grid-cols-2 gap-2">
+                <a
+                  role="menuitem"
+                  href="https://www.linkedin.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 border border-red-400/30 bg-red-500/10 px-3 py-2 text-[11px] tracking-wide text-red-100 transition-colors hover:bg-red-500/20"
+                >
+                  <LinkedinLogoIcon
+                    weight="fill"
+                    size={16}
+                    className="text-red-300"
+                  />
+                  LinkedIn
+                </a>
+                <a
+                  role="menuitem"
+                  href="https://www.behance.net"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 border border-red-400/30 bg-red-500/10 px-3 py-2 text-[11px] tracking-wide text-red-100 transition-colors hover:bg-red-500/20"
+                >
+                  <BehanceLogoIcon
+                    weight="fill"
+                    size={16}
+                    className="text-red-300"
+                  />
+                  Behance
+                </a>
+                <a
+                  role="menuitem"
+                  href="mailto:hello@example.com"
+                  className="flex items-center gap-2 border border-red-400/30 bg-red-500/10 px-3 py-2 text-[11px] tracking-wide text-red-100 transition-colors hover:bg-red-500/20"
+                >
+                  <EnvelopeSimpleIcon
+                    weight="fill"
+                    size={16}
+                    className="text-red-300"
+                  />
+                  Email
+                </a>
+                <a
+                  role="menuitem"
+                  href="https://wa.me/1234567890"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-2 border border-red-400/30 bg-red-500/10 px-3 py-2 text-[11px] tracking-wide text-red-100 transition-colors hover:bg-red-500/20"
+                >
+                  <WhatsappLogoIcon
+                    weight="fill"
+                    size={16}
+                    className="text-red-300"
+                  />
+                  WhatsApp
+                </a>
+              </div>
+            </motion.div>
           </div>
         </aside>
 
