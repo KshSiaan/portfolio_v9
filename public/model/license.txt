@@ -1,0 +1,11 @@
+Model Information:
+* title:	Ghost Raven
+* source:	https://sketchfab.com/3d-models/ghost-raven-0a5014dc066548f7b746ccfdbb4f2d9a
+* author:	Alex Sanches (https://sketchfab.com/ASanches)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Ghost Raven" (https://sketchfab.com/3d-models/ghost-raven-0a5014dc066548f7b746ccfdbb4f2d9a) by Alex Sanches (https://sketchfab.com/ASanches) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

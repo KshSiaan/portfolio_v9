@@ -3,6 +3,7 @@ import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
 import { useMotionValue, useSpring } from "motion/react";
 import * as THREE from "three";
+import { useLoadingStore } from "@/stores/loading-store";
 
 type RavenProps = {
   position?: [number, number, number];
@@ -15,6 +16,7 @@ export default function Raven({
 }: RavenProps) {
   const gltf = useGLTF("/model/scene.gltf");
   const groupRef = useRef<THREE.Group>(null);
+  const setModelLoaded = useLoadingStore((state) => state.setModelLoaded);
 
   const positionX = useSpring(useMotionValue(position[0]), {
     stiffness: 80,
@@ -64,6 +66,12 @@ export default function Raven({
     rotationY,
     rotationZ,
   ]);
+
+  useEffect(() => {
+    if (gltf.scene) {
+      setModelLoaded(true);
+    }
+  }, [gltf.scene, setModelLoaded]);
 
   const model = useMemo(() => {
     const scene = gltf.scene.clone(true);
