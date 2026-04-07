@@ -5,6 +5,7 @@ import { Progress } from "@/components/ui/progress";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import useSWR from "swr";
+import { useLoadingStore } from "@/stores/loading-store";
 
 import {
   BarcodeIcon,
@@ -82,22 +83,6 @@ const metricCardVariants = {
   },
 } as const;
 
-const scanlineVariants = {
-  hidden: { x: "-120%", opacity: 0 },
-  show: {
-    x: "220%",
-    opacity: [0, 0.9, 0],
-    transition: { duration: 1.2, ease: "easeInOut", delay: 0.25 },
-  },
-} as const;
-
-const idleFloatTransition = {
-  duration: 3.2,
-  repeat: Infinity,
-  repeatType: "mirror",
-  ease: "easeInOut",
-} as const;
-
 const pulseTransition = {
   duration: 1.8,
   repeat: Infinity,
@@ -157,7 +142,7 @@ function MetricCard({ icon: Icon, title, value }: MetricCardItem) {
         }}
       />
       <motion.div
-        className="flex w-18 shrink-0 items-center justify-center self-stretch [aspect-ratio:1/1]"
+        className="flex w-18 shrink-0 items-center justify-center self-stretch aspect-square"
         animate={{ scale: [1, 1.08, 1], opacity: [0.75, 1, 0.75] }}
         transition={pulseTransition}
       >
@@ -174,42 +159,7 @@ function MetricCard({ icon: Icon, title, value }: MetricCardItem) {
 export default function Home() {
   const [showContactMenu, setShowContactMenu] = useState(false);
   const contactMenuRef = useRef<HTMLDivElement | null>(null);
-
-  useEffect(() => {
-    const handlePointerDown = (event: MouseEvent) => {
-      if (!showContactMenu) return;
-      if (!contactMenuRef.current) return;
-
-      if (!contactMenuRef.current.contains(event.target as Node)) {
-        setShowContactMenu(false);
-      }
-    };
-
-    const handleEscape = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setShowContactMenu(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handlePointerDown);
-    document.addEventListener("keydown", handleEscape);
-
-    return () => {
-      document.removeEventListener("mousedown", handlePointerDown);
-      document.removeEventListener("keydown", handleEscape);
-    };
-  }, [showContactMenu]);
-
-  useEffect(() => {
-    const scrollableParent = document.querySelector(
-      'section[class*="overflow-y-auto"]',
-    ) as HTMLElement;
-    if (scrollableParent) {
-      scrollableParent.scrollTo({ top: 0, behavior: "instant" });
-    } else {
-      window.scrollTo({ top: 0, behavior: "instant" });
-    }
-  }, []);
+  const setContentLoaded = useLoadingStore((state) => state.setContentLoaded);
 
   const {
     data: reposData,
@@ -238,6 +188,49 @@ export default function Home() {
       revalidateIfStale: true,
     },
   );
+
+  useEffect(() => {
+    const handlePointerDown = (event: MouseEvent) => {
+      if (!showContactMenu) return;
+      if (!contactMenuRef.current) return;
+
+      if (!contactMenuRef.current.contains(event.target as Node)) {
+        setShowContactMenu(false);
+      }
+    };
+
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setShowContactMenu(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handlePointerDown);
+    document.addEventListener("keydown", handleEscape);
+
+    return () => {
+      document.removeEventListener("mousedown", handlePointerDown);
+      document.removeEventListener("keydown", handleEscape);
+    };
+  }, [showContactMenu]);
+
+  useEffect(() => {
+    const isDataLoaded = !reposLoading && !overviewLoading;
+    if (isDataLoaded) {
+      setContentLoaded(true);
+    }
+  }, [reposLoading, overviewLoading, setContentLoaded]);
+
+  useEffect(() => {
+    const scrollableParent = document.querySelector(
+      'section[class*="overflow-y-auto"]',
+    ) as HTMLElement;
+    if (scrollableParent) {
+      scrollableParent.scrollTo({ top: 0, behavior: "instant" });
+    } else {
+      window.scrollTo({ top: 0, behavior: "instant" });
+    }
+  }, []);
 
   const metricCards: MetricCardItem[] = [
     {
@@ -384,8 +377,7 @@ export default function Home() {
               repeatDelay: 2.2,
             }}
           >
-            {/** biome-ignore lint/suspicious/noCommentText: <explanation> */}
-            OPERATOR // STATUS: ACTIVE
+            {"OPERATOR // STATUS: ACTIVE"}
           </motion.h4>
           <p className="text-xl lg:text-6xl mt-6 font-medium">V_RAVEN_09</p>
           <div className="mt-6 flex gap-3">
@@ -445,8 +437,7 @@ export default function Home() {
           </div>
 
           <span className="text-xs font-mono! text-[#CBFFB6] tracking-[6px]">
-            {/** biome-ignore lint/suspicious/noCommentText: <explanation> */}
-            ACTIVE PROJECTS.LOG
+            {"ACTIVE PROJECTS.LOG"}
           </span>
         </div>
         {reposLoading ? (
@@ -455,14 +446,13 @@ export default function Home() {
             variants={panelVariants}
           >
             <h4 className="text-xs font-mono! text-[#CBFFB6] tracking-[4px]">
-              {/** biome-ignore lint/suspicious/noCommentText: <explanation> */}
-              LOADING // GITHUB
+              {"LOADING // GITHUB"}
             </h4>
             <p className="text-2xl mt-6 font-medium">SYNCING PROJECTS...</p>
             <Progress
               value={35}
               max={100}
-              className="mt-6 w-[25dvw] [&_[data-slot=progress-indicator]]:bg-[#CBFFB6]"
+              className="mt-6 w-[25dvw] **:data-[slot=progress-indicator]:bg-[#CBFFB6]"
             />
           </motion.div>
         ) : reposError ? (
@@ -471,14 +461,13 @@ export default function Home() {
             variants={panelVariants}
           >
             <h4 className="text-xs font-mono! text-red-400 tracking-[4px]">
-              {/** biome-ignore lint/suspicious/noCommentText: <explanation> */}
-              ERROR // GITHUB
+              {"ERROR // GITHUB"}
             </h4>
             <p className="text-2xl mt-6 font-medium">PROJECT FETCH FAILED</p>
             <Progress
               value={100}
               max={100}
-              className="mt-6 w-[25dvw] [&_[data-slot=progress-indicator]]:bg-red-400"
+              className="mt-6 w-[25dvw] **:data-[slot=progress-indicator]:bg-red-400"
             />
           </motion.div>
         ) : (
@@ -511,8 +500,7 @@ export default function Home() {
                 }}
               >
                 <h4 className="text-xs font-mono! text-white/45 tracking-[4px]">
-                  {/** biome-ignore lint/suspicious/noCommentText: <explanation> */}
-                  {String(idx + 1).padStart(2, "0")} // GITHUB_REPO
+                  {`${String(idx + 1).padStart(2, "0")} // GITHUB_REPO`}
                 </h4>
                 <p className="text-2xl mt-6 font-medium uppercase tracking-tight">
                   {project.name}
@@ -523,7 +511,7 @@ export default function Home() {
                 <Progress
                   value={starProgress}
                   max={100}
-                  className="mt-6 w-[25dvw] [&_[data-slot=progress-indicator]]:bg-[#CBFFB6]"
+                  className="mt-6 w-[25dvw] **:data-[slot=progress-indicator]:bg-[#CBFFB6]"
                 />
               </motion.a>
             );

@@ -4,6 +4,7 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ViewTransitions } from "next-view-transitions";
 import ExitGuard from "@/components/core/exit-guard";
+import LoadingScreen from "@/components/core/loading-screen";
 const suse = Space_Grotesk({
   subsets: ["latin"],
   variable: "--font-mono",
@@ -27,6 +28,7 @@ export default function RootLayout({
         className={cn("h-full dark", "antialiased", suse.className)}
       >
         <body className="h-dvh w-dvw overflow-hidden flex flex-col">
+          <LoadingScreen />
           <ExitGuard />
           {children}
         </body>
